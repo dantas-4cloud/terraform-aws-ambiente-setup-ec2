@@ -12,4 +12,5 @@ variable "environment" {
 variable "ebs_block_devices" {
   description = "List of EBS block devices to attach to the instances"
   type        = list(any)
+  default     = []
 }
