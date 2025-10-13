@@ -1,15 +1,16 @@
-name: testando-modulo-terraform
-run-name: ${{ github.actor }} iniciou o teste do módulo terraform
-on: 
+name: tfsec-pr-commenter
+on:
   pull_request:
 jobs:
-    tfsec:
-        runs-on: ubuntu-lastest
-        steps:
-            - name: download repository
-              uses: actions/checkout@v4
-            - name: Install tfsec
-              run: |
-                curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-            - name: Run tfsec
-              run: tfsec .
+  tfsec:
+    name: tfsec PR commenter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+
+      - name: tfsec
+        uses: tfsec/tfsec-pr-commenter-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
